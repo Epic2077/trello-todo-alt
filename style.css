@@ -68,6 +68,14 @@ main > h1 {
   display: grid;
   gap: 1vw;
 }
+#doing-all-cards {
+  display: grid;
+  gap: 1vw;
+}
+#done {
+  display: grid;
+  gap: 1vw;
+}
 .card {
   width: 28vw;
   background-color: #b8b7b7;

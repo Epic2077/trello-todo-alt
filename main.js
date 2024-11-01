@@ -118,9 +118,9 @@ function displayAllTasks() {
 
 function displayTask(task) {
   let taskCounter = 0;
-  let container;
 
-  container = document.getElementById("todo-all-cards");
+  let container = document.getElementById("todo-all-cards");
+  let containerDoing = document.getElementById("doing-all-cards");
 
   taskCounter++;
   let uniqueId = `next-${taskCounter}`;
@@ -136,6 +136,7 @@ function displayTask(task) {
           <button button id="edit-task">Edit</button>
           <button id="delete-task">Delete</button>
           <button id="mark-doing">Mark as Doing</button>
+          <button id="mark-doing">Mark as Done</button>
         </div>
       </div>
       <p class="inside-p">${task.description}</p>
@@ -147,6 +148,8 @@ function displayTask(task) {
   `;
   if (task.list === "todo") {
     container.appendChild(taskDiv);
+  } else if (task.list === "doing") {
+    containerDoing.appendChild(taskDiv);
   }
 
   let nextBtn = document.getElementById(uniqueId);
@@ -166,6 +169,25 @@ function showOptionsMenu(event, taskTitle) {
   document.getElementById("delete-task").onclick = () => deleteTask(taskTitle);
   document.getElementById("mark-doing").onclick = () =>
     markTaskAsDoing(taskTitle);
+}
+
+function markTaskAsDoing(taskTitle) {
+  let task = JSON.parse(localStorage.getItem(taskTitle));
+  if (task) {
+    task.list = "doing";
+    localStorage.setItem(taskTitle, JSON.stringify(task));
+    displayAllTasks();
+  }
+}
+
+function editTask(taskTitle) {
+  let task = JSON.parse(localStorage.getItem(taskTitle));
+  if (task) {
+    task.description =
+      prompt("Edit Description", task.description) || task.description;
+    localStorage.setItem(task.title, JSON.stringify(task));
+    displayAllTasks();
+  }
 }
 newTaskComplition();
 displayAllTasks();
