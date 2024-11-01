@@ -19,36 +19,55 @@
           <section class="card">
             <header>
               <h2>To do</h2>
-              <p>...</p>
+              <p class="options" id="todo-options">...</p>
+              <div id="options-menu" class="options-menu hidden">
+                <p id="new-task">New Task</p>
+              </div>
             </header>
             <main class="card-main">
+              <div id="new-card" class="inside-card hidden">
+                <p class="close" id="close">X</p>
+                <input
+                  type="text"
+                  placeholder="Enter Title"
+                  class="card-value-new"
+                  id="card-title-new"
+                />
+                <textarea
+                  type="text"
+                  placeholder="Enter Description"
+                  class="card-value-new"
+                  id="card-des-new"
+                ></textarea>
+                <div class="choose-color">
+                  <div class="colors bg-white" id="bg-default"></div>
+                  <div class="colors bg-red" id="red"></div>
+                  <div class="colors bg-cyan" id="cyan"></div>
+                  <div class="colors bg-green" id="green"></div>
+                  <div class="colors bg-yellow" id="yellow"></div>
+                </div>
+                <input
+                  type="submit"
+                  class="submit"
+                  value="submit"
+                  id="submit"
+                />
+              </div>
               <div class="inside-card">
                 <div class="flex">
-                  <p class="inside-p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Officia asperiores nemo iure, amet officiis expedita saepe
-                    accusantium commodi! Ipsa dolores veritatis odit, incidunt
-                    nisi rem?
-                  </p>
-                  <div class="next" id="next">-></div>
+                  <h3>Title</h3>
+                  <div class="next" id="next">...</div>
                 </div>
+                <p class="inside-p">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Officia asperiores nemo iure, amet officiis expedita saepe
+                  accusantium commodi! Ipsa dolores veritatis odit, incidunt
+                  nisi rem?
+                </p>
                 <div class="details">
-                  <p class="time" id="time">created in: 1:04AM</p>
-                  <p class="creator">-Ashkan</p>
-                </div>
-              </div>
-              <div class="inside-card bg-red">
-                <div class="flex">
-                  <p class="inside-p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Officia asperiores nemo iure, amet officiis expedita saepe
-                    accusantium commodi! Ipsa dolores veritatis odit, incidunt
-                    nisi rem?
+                  <p class="time" id="time">
+                    created in: <span class="timer" id="time-1">1:04AM</span>
                   </p>
-                  <div class="next" id="next">-></div>
-                </div>
-                <div class="details">
-                  <p class="time" id="time">created in: 1:04AM</p>
                   <p class="creator">-Ashkan</p>
                 </div>
               </div>
@@ -60,7 +79,7 @@
                     accusantium commodi! Ipsa dolores veritatis odit, incidunt
                     nisi rem?
                   </p>
-                  <div class="next" id="next">-></div>
+                  <div class="next" id="next">...</div>
                 </div>
                 <div class="details">
                   <p class="time" id="time">created in: 1:04AM</p>

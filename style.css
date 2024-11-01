@@ -87,6 +87,7 @@ header > p {
   font-size: 2rem;
   margin-left: auto;
 }
+
 .card-main {
   display: grid;
   gap: 1vw;
@@ -96,8 +97,35 @@ header > p {
   scrollbar-width: thin;
   scrollbar-color: #202020 transparent;
 }
+.options {
+  cursor: pointer;
+}
+.options-menu {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  left: 340px;
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.options-menu p {
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.options-menu p:hover {
+  background-color: #e0e0e0;
+}
 .inside-card {
-  width: 100%;
+  width: 35.5rem;
   color: black;
   background-color: rgba(240, 240, 240, 0.692);
   border-radius: 5px;
@@ -135,4 +163,64 @@ header > p {
 }
 .bg-yellow {
   background-color: rgb(153, 153, 56);
+}
+.bg-white {
+  background-color: #e0e0e0;
+}
+textarea {
+  max-width: 32.5rem;
+  min-width: 32.5rem;
+  min-height: 9rem;
+}
+.card-value-new {
+  width: 100%;
+
+  padding: 1rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #202020;
+  margin-bottom: 10px;
+}
+.choose-color {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.colors {
+  width: 5.5rem;
+  height: 1.5rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border: 1px solid #202020;
+}
+.colors:hover {
+  border: 2px solid #591283;
+  padding: 0.5vw;
+}
+.submit {
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 1vw;
+  height: 1.5vw;
+  background-color: gray;
+  color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.close {
+  cursor: pointer;
+  margin-bottom: 1vw;
+}
+.timer {
+  font-size: 1rem;
 }
