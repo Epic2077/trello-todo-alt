@@ -26,8 +26,21 @@ function newTask() {
 
 newTask();
 
+function removeAll() {
+  const removeAll = document.getElementById("remove-all");
+  let newCard = document.getElementById("new-card");
+  const optionsMenu = document.getElementById("options-menu");
+  const tasks = document.getElementById("todo-all-cards");
+
+  removeAll.addEventListener("click", function () {
+    tasks.innerHTML = "";
+    localStorage.clear();
+    optionsMenu.classList.add("hidden");
+  });
+}
+removeAll();
+
 function newTaskComplition() {
-  let store = [];
   let time = new Date();
   let close = document.getElementById("close");
   let newCard = document.getElementById("new-card");
@@ -35,8 +48,6 @@ function newTaskComplition() {
   let description = document.getElementById("card-des-new");
   let submit = document.getElementById("submit");
   let color = "white";
-  let titleValue = title.value;
-  let descValue = description.value;
 
   close.addEventListener("click", function (cl) {
     newCard.classList.add("hidden");
@@ -62,14 +73,29 @@ function newTaskComplition() {
   });
 
   submit.addEventListener("click", function (sub) {
+    let titleValue = title.value;
+    let descValue = description.value;
+
+    let timeCreated = `${time.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })} 
+                       ${time.toLocaleTimeString(undefined, {
+                         hour: "2-digit",
+                         minute: "2-digit",
+                       })}`;
     let colorValue = color;
+    let type = "todo";
 
     let task = {
       title: titleValue,
       description: descValue,
       color: colorValue,
-      timeCreated: time.toLocaleString(),
+      timeCreated: timeCreated,
+      list: type,
     };
+    console.log(task);
     localStorage.setItem(titleValue, JSON.stringify(task));
     newCard.classList.add("hidden");
     title.value = "";
@@ -78,8 +104,68 @@ function newTaskComplition() {
     displayTask(task);
   });
 }
-newTaskComplition();
 
-function getData() {
-  console.log(localStorage.length);
+function displayAllTasks() {
+  let container = document.getElementById("todo-all-cards");
+  container.innerHTML = "";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let task = JSON.parse(localStorage.getItem(key));
+    displayTask(task);
+  }
 }
+
+function displayTask(task) {
+  let taskCounter = 0;
+  let container;
+
+  container = document.getElementById("todo-all-cards");
+
+  taskCounter++;
+  let uniqueId = `next-${taskCounter}`;
+
+  let taskDiv = document.createElement("div");
+  taskDiv.className = `inside-card bg-${task.color}`;
+
+  taskDiv.innerHTML = `
+      <div class="flex">
+        <h3>${task.title}</h3>
+        <div class="next" id="${uniqueId}">...</div>
+        <div id="task-options-menu" class="task-options hidden">
+          <button button id="edit-task">Edit</button>
+          <button id="delete-task">Delete</button>
+          <button id="mark-doing">Mark as Doing</button>
+        </div>
+      </div>
+      <p class="inside-p">${task.description}</p>
+      <div class="details">
+        <p class="time" id="time">
+          created in: <span class="timer" id="time-1">${task.timeCreated}</span>
+        </p>
+      </div>
+  `;
+  if (task.list === "todo") {
+    container.appendChild(taskDiv);
+  }
+
+  let nextBtn = document.getElementById(uniqueId);
+  nextBtn.addEventListener("click", function (event) {
+    showOptionsMenu(event, task.title);
+  });
+}
+
+function showOptionsMenu(event, taskTitle) {
+  const menu = document.getElementById("task-options-menu");
+  menu.classList.toggle("hidden");
+
+  menu.style.top = `${event.clientY}px`;
+  menu.style.left = `${event.clientX}px`;
+
+  document.getElementById("edit-task").onclick = () => editTask(taskTitle);
+  document.getElementById("delete-task").onclick = () => deleteTask(taskTitle);
+  document.getElementById("mark-doing").onclick = () =>
+    markTaskAsDoing(taskTitle);
+}
+newTaskComplition();
+displayAllTasks();

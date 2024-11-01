@@ -22,6 +22,7 @@
               <p class="options" id="todo-options">...</p>
               <div id="options-menu" class="options-menu hidden">
                 <p id="new-task">New Task</p>
+                <p id="remove-all">Remove All</p>
               </div>
             </header>
             <main class="card-main">
@@ -53,39 +54,7 @@
                   id="submit"
                 />
               </div>
-              <div class="inside-card">
-                <div class="flex">
-                  <h3>Title</h3>
-                  <div class="next" id="next">...</div>
-                </div>
-                <p class="inside-p">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Officia asperiores nemo iure, amet officiis expedita saepe
-                  accusantium commodi! Ipsa dolores veritatis odit, incidunt
-                  nisi rem?
-                </p>
-                <div class="details">
-                  <p class="time" id="time">
-                    created in: <span class="timer" id="time-1">1:04AM</span>
-                  </p>
-                  <p class="creator">-Ashkan</p>
-                </div>
-              </div>
-              <div class="inside-card bg-yellow">
-                <div class="flex">
-                  <p class="inside-p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Officia asperiores nemo iure, amet officiis expedita saepe
-                    accusantium commodi! Ipsa dolores veritatis odit, incidunt
-                    nisi rem?
-                  </p>
-                  <div class="next" id="next">...</div>
-                </div>
-                <div class="details">
-                  <p class="time" id="time">created in: 1:04AM</p>
-                  <p class="creator">-Ashkan</p>
-                </div>
-              </div>
+              <div id="todo-all-cards"></div>
             </main>
           </section>
           <section class="card">

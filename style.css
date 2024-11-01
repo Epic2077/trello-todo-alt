@@ -64,6 +64,10 @@ main > h1 {
   height: max-content;
   gap: 3vw;
 }
+#todo-all-cards {
+  display: grid;
+  gap: 1vw;
+}
 .card {
   width: 28vw;
   background-color: #b8b7b7;
@@ -140,6 +144,7 @@ header > p {
   display: flex;
 }
 .inside-p {
+  margin-top: 1vw;
   width: 20vw;
 }
 .next {
@@ -222,5 +227,13 @@ textarea {
   margin-bottom: 1vw;
 }
 .timer {
-  font-size: 1rem;
+  font-size: 1.2rem;
+}
+.task-options {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
