@@ -61,7 +61,7 @@ function newTaskComplition() {
   close.addEventListener("click", function (cl) {
     newCard.classList.add("hidden");
     title.value = "";
-    descValue = "";
+    description.value = "";
   });
   const colorDivs = document.querySelectorAll(".choose-color .colors");
 
@@ -108,7 +108,7 @@ function newTaskComplition() {
     localStorage.setItem(titleValue, JSON.stringify(task));
     newCard.classList.add("hidden");
     title.value = "";
-    descValue = "";
+    description.value = "";
 
     displayTask(task);
   });
@@ -117,8 +117,10 @@ function newTaskComplition() {
 function displayAllTasks() {
   let container = document.getElementById("todo-all-cards");
   let containerDoing = document.getElementById("doing-all-cards");
+  let containerDone = document.getElementById("done-all-cards");
   container.innerHTML = "";
   containerDoing.innerHTML = "";
+  containerDone.innerHTML = "";
 
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
@@ -130,6 +132,7 @@ function displayAllTasks() {
 function displayTask(task) {
   let container = document.getElementById("todo-all-cards");
   let containerDoing = document.getElementById("doing-all-cards");
+  let containerDone = document.getElementById("done-all-cards");
 
   let taskDiv = document.createElement("div");
   taskDiv.className = `inside-card bg-${task.color}`;
@@ -142,7 +145,7 @@ function displayTask(task) {
           <button button id="edit-task">Edit</button>
           <button id="delete-task">Delete</button>
           <button id="mark-doing">Mark as Doing</button>
-          <button id="mark-doing">Mark as Done</button>
+          <button id="mark-done">Mark as Done</button>
         </div>
       </div>
       <p class="inside-p">${task.description}</p>
@@ -156,6 +159,8 @@ function displayTask(task) {
     container.appendChild(taskDiv);
   } else if (task.list === "doing") {
     containerDoing.appendChild(taskDiv);
+  } else if (task.list === "done") {
+    containerDone.appendChild(taskDiv);
   }
 
   let nextBtn = document.getElementById(task.title);
@@ -175,6 +180,19 @@ function showOptionsMenu(event, taskTitle) {
   document.getElementById("delete-task").onclick = () => deleteTask(taskTitle);
   document.getElementById("mark-doing").onclick = () =>
     markTaskAsDoing(taskTitle);
+  document.getElementById("mark-done").onclick = () =>
+    markTaskAsDone(taskTitle);
+
+  setTimeout(() => {
+    function handleClickOutside(event) {
+      if (!menu.contains(event.target)) {
+        menu.classList.add("hidden");
+        document.removeEventListener("click", handleClickOutside);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+  }, 0);
 }
 
 function markTaskAsDoing(taskTitle) {
@@ -186,12 +204,30 @@ function markTaskAsDoing(taskTitle) {
   }
 }
 
+function markTaskAsDone(taskTitle) {
+  let task = JSON.parse(localStorage.getItem(taskTitle));
+  if (task) {
+    task.list = "done";
+    localStorage.setItem(taskTitle, JSON.stringify(task));
+    displayAllTasks();
+  }
+}
+
 function editTask(taskTitle) {
   let task = JSON.parse(localStorage.getItem(taskTitle));
   if (task) {
     task.description =
       prompt("Edit Description", task.description) || task.description;
     localStorage.setItem(task.title, JSON.stringify(task));
+    displayAllTasks();
+  }
+}
+
+function deleteTask(taskTitle) {
+  if (localStorage.getItem(taskTitle)) {
+    // Remove the task using its title as the key
+    localStorage.removeItem(taskTitle);
+    // Refresh the displayed tasks
     displayAllTasks();
   }
 }

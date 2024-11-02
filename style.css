@@ -72,7 +72,7 @@ main > h1 {
   display: grid;
   gap: 1vw;
 }
-#done {
+#done-all-cards {
   display: grid;
   gap: 1vw;
 }
@@ -123,10 +123,6 @@ header > p {
   margin-top: 30px;
 }
 
-.hidden {
-  display: none;
-}
-
 .options-menu p {
   margin: 0;
   padding: 5px;
@@ -157,6 +153,7 @@ header > p {
 }
 .next {
   margin-left: auto;
+  cursor: pointer;
 }
 .details {
   margin-top: 1vw;
@@ -244,4 +241,19 @@ textarea {
   padding: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 10;
+  display: grid;
+  gap: 10px;
+}
+.task-options > button {
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid #202020;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.hidden {
+  display: none;
 }
