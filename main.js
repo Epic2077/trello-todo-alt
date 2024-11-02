@@ -28,14 +28,23 @@ newTask();
 
 function removeAll() {
   const removeAll = document.getElementById("remove-all");
-  let newCard = document.getElementById("new-card");
   const optionsMenu = document.getElementById("options-menu");
   const tasks = document.getElementById("todo-all-cards");
 
   removeAll.addEventListener("click", function () {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const task = JSON.parse(localStorage.getItem(key));
+
+      if (task && task.list === "todo") {
+        localStorage.removeItem(key);
+        i--;
+      }
+    }
+
     tasks.innerHTML = "";
-    localStorage.clear();
     optionsMenu.classList.add("hidden");
+    displayAllTasks();
   });
 }
 removeAll();
@@ -73,14 +82,14 @@ function newTaskComplition() {
   });
 
   submit.addEventListener("click", function (sub) {
-    let titleValue = title.value;
+    let titleValue = title.value.replace(" ", "-");
     let descValue = description.value;
 
     let timeCreated = `${time.toLocaleDateString(undefined, {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-    })} 
+    })}
                        ${time.toLocaleTimeString(undefined, {
                          hour: "2-digit",
                          minute: "2-digit",
@@ -107,7 +116,9 @@ function newTaskComplition() {
 
 function displayAllTasks() {
   let container = document.getElementById("todo-all-cards");
+  let containerDoing = document.getElementById("doing-all-cards");
   container.innerHTML = "";
+  containerDoing.innerHTML = "";
 
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
@@ -117,13 +128,8 @@ function displayAllTasks() {
 }
 
 function displayTask(task) {
-  let taskCounter = 0;
-
   let container = document.getElementById("todo-all-cards");
   let containerDoing = document.getElementById("doing-all-cards");
-
-  taskCounter++;
-  let uniqueId = `next-${taskCounter}`;
 
   let taskDiv = document.createElement("div");
   taskDiv.className = `inside-card bg-${task.color}`;
@@ -131,7 +137,7 @@ function displayTask(task) {
   taskDiv.innerHTML = `
       <div class="flex">
         <h3>${task.title}</h3>
-        <div class="next" id="${uniqueId}">...</div>
+        <div class="next" id="${task.title}">...</div>
         <div id="task-options-menu" class="task-options hidden">
           <button button id="edit-task">Edit</button>
           <button id="delete-task">Delete</button>
@@ -152,7 +158,7 @@ function displayTask(task) {
     containerDoing.appendChild(taskDiv);
   }
 
-  let nextBtn = document.getElementById(uniqueId);
+  let nextBtn = document.getElementById(task.title);
   nextBtn.addEventListener("click", function (event) {
     showOptionsMenu(event, task.title);
   });
